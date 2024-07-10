@@ -1,0 +1,1 @@
+// sort garera, waiting time track gar, ani sum nikalera total processes sanga divide gar.
