@@ -89,6 +89,30 @@ public:
         return true;
     }
 
+    // more efficient - store the first half elements in stack and traverse the next half comparing values with these popped ones.. 
+    bool best(ListNode* head) {
+            stack<int> st;
+            ListNode* slow = head;
+            ListNode* fast = head;
+    
+            // getting to middle of odd size ll and second middle of even sized..
+            while (fast && fast->next) {
+                st.push(slow->val);
+                slow = slow->next;
+                fast = fast->next->next;
+            }
+    
+            // Skip middle element in case of odd-length
+            if (fast) slow = slow->next;
+    
+            while (slow) {
+                if (st.top() != slow->val) return false;
+                st.pop();
+                slow = slow->next;
+            }
+            return true;
+    }
+
 
     bool isPalindrome(ListNode* head) {
         // return bruteForce(head);
