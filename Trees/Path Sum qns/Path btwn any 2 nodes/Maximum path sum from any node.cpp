@@ -20,10 +20,12 @@ class Solution{
         // left ya right max nai negative bahe ta tyo bhanda ramro na line 0.
         int leftMax = max(0, maxPathDown(root -> left, maxi));
         int rightMax = max(0, maxPathDown(root -> right, maxi));
-        
+
+        // this ans is what we are tracking.. 
         int ans = root -> data + leftMax + rightMax;
         maxi = max(maxi, ans);
-        
+
+        // returning value is kinda height so ... this + either left or right..
         return root -> data + max(leftMax, rightMax);
     }
   
