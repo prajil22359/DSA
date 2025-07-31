@@ -82,6 +82,6 @@ public:
 };
 
 // yasailai preorder garnu pare. while making the threaded link put curr in preorder vector, only 
-// then move left and eventually right. NLR. just a change in place of line 78 to 70.
+// then move left and eventually right. NLR. 
                             
                         
