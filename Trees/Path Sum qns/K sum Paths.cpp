@@ -17,7 +17,7 @@ struct Node
     }
 };
 
-
+// CLEVER BUT NOT FULLY OPTIMIZED
 class Solution{
   public:
 
@@ -47,5 +47,42 @@ class Solution{
         vector<int> path;
         solve(root, k, count, path);
         return count;
+    }
+};
+
+
+// OPTIMIZED APPROACH O(N)
+class Solution {
+    int answer = 0;
+    unordered_map<int,int> count;  // prefixSum → frequency
+
+public:
+    int pathSum(TreeNode* root, int K) {
+        count[0] = 1;            // “empty” prefix has sum 0 once
+        dfs(root, 0, K);
+        return answer;
+    }
+
+private:
+    void dfs(TreeNode* node, int currSum, int K) {
+        if (!node) return;
+
+        // 1) Update current sum
+        currSum += node->val;
+
+        // 2) Count paths ending here with sum K
+        //    That means some earlier prefixSum = currSum - K
+        if (count.count(currSum - K))
+            answer += count[currSum - K];
+
+        // 3) Include this prefixSum for children
+        count[currSum]++;
+
+        // 4) Recurse down
+        dfs(node->left,  currSum, K);
+        dfs(node->right, currSum, K);
+
+        // 5) Backtrack: remove this prefix before returning
+        count[currSum]--;
     }
 };
